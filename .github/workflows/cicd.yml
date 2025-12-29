@@ -24,8 +24,15 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker image
-        run: |
-          docker build -t fitness-dashboard .
+        run: docker build -t fitness-dashboard .
+
+      - name: Trivy image scan
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          image-ref: fitness-dashboard:latest
+          format: table
+          severity: HIGH,CRITICAL
+          exit-code: 0
 
       - name: Tag Docker image
         run: |
