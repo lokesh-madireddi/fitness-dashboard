@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fitness-dashboard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fitness-dashboard
+  template:
+    metadata:
+      labels:
+        app: fitness-dashboard
+    spec:
+      containers:
+        - name: fitness-dashboard
+          image: 941781854284.dkr.ecr.eu-north-1.amazonaws.com/fitness-dashboard:latest
+          ports:
+            - containerPort: 5000
